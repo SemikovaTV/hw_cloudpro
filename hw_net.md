@@ -79,6 +79,9 @@ internal_ip_address_public_vm = "192.168.10.23"
 
 ![image](https://github.com/SemikovaTV/hw_cloudpro/assets/129278233/e91a0159-c5a2-438b-b8c4-1ed178c10b48)
 
+
+[terraform](https://github.com/SemikovaTV/hw_cloudpro/tree/main/terraform)
+
 Resource Terraform для Yandex Cloud:
 
 - [VPC subnet](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/vpc_subnet).
