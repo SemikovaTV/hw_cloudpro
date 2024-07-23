@@ -33,12 +33,29 @@
  - Для создания стартовой веб-страницы рекомендуется использовать раздел `user_data` в [meta_data](https://cloud.yandex.ru/docs/compute/concepts/vm-metadata).
  - Разместить в стартовой веб-странице шаблонной ВМ ссылку на картинку из бакета.
  - Настроить проверку состояния ВМ.
+
+![image](https://github.com/user-attachments/assets/4d10366b-bb85-41f5-bf5f-fe1de4899117)
+
+Изображение из бакета доступно на виртуальной машине:
+
+![image](https://github.com/user-attachments/assets/7ac300c9-c8f9-432d-9728-4227ee76a72a)
+
+
  
 3. Подключить группу к сетевому балансировщику:
 
  - Создать сетевой балансировщик.
  - Проверить работоспособность, удалив одну или несколько ВМ.
-4. (дополнительно)* Создать Application Load Balancer с использованием Instance group и проверкой состояния.
+
+![image](https://github.com/user-attachments/assets/fba4f614-296a-4ff6-9104-0931ffa44489)
+
+Удаляем одну машиину:
+
+![image](https://github.com/user-attachments/assets/c9319793-f769-4fac-8261-f951c76de225)
+
+Изображение из bucket доступно по адресу load balancer:
+
+![image](https://github.com/user-attachments/assets/cd23c4f0-aa66-4067-9b0a-7d2d86e3f582)
 
 Полезные документы:
 
