@@ -57,6 +57,11 @@
 
 ![image](https://github.com/user-attachments/assets/cd23c4f0-aa66-4067-9b0a-7d2d86e3f582)
 
+Машина восстановлена:
+
+![image](https://github.com/user-attachments/assets/1c2c91e3-d211-4833-af72-54991a8b9ef6)
+
+
 Полезные документы:
 
 - [Compute instance group](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/compute_instance_group).
