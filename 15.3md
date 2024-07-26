@@ -1,0 +1,59 @@
+# Домашнее задание к занятию «Безопасность в облачных провайдерах» - Семикова Т.В.  FOPS-9
+
+Используя конфигурации, выполненные в рамках предыдущих домашних заданий, нужно добавить возможность шифрования бакета.
+
+---
+## Задание 1. Yandex Cloud   
+
+1. С помощью ключа в KMS необходимо зашифровать содержимое бакета:
+
+ - создать ключ в KMS;
+ - с помощью ключа зашифровать содержимое бакета, созданного ранее.
+2. (Выполняется не в Terraform)* Создать статический сайт в Object Storage c собственным публичным адресом и сделать доступным по HTTPS:
+
+ - создать сертификат;
+ - создать статическую страницу в Object Storage и применить сертификат HTTPS;
+ - в качестве результата предоставить скриншот на страницу с сертификатом в заголовке (замочек).
+
+Полезные документы:
+
+- [Настройка HTTPS статичного сайта](https://cloud.yandex.ru/docs/storage/operations/hosting/certificate).
+- [Object Storage bucket](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/storage_bucket).
+- [KMS key](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/kms_symmetric_key).
+
+--- 
+### Ответ:
+1. Создаю ролья для KMS:
+```hcl
+resource "yandex_resourcemanager_folder_iam_member" "sa-editor-encrypter-decrypter" {
+  folder_id = var.folder_id
+  role      = "kms.keys.encrypterDecrypter"
+  member    = "serviceAccount:${yandex_iam_service_account.sa-bucket.id}"
+}
+```
+2. Создаю симметричный ключ шифрования:
+```hcl
+resource "yandex_kms_symmetric_key" "secret-key" {
+  name              = "key-1"
+  description       = "ключ для шифрования бакета"
+  default_algorithm = "AES_128"
+  rotation_period   = "24h"
+```
+3. Добавляю ключт шифрования к ранее созданному бакету:
+```hcl
+resource "yandex_storage_bucket" "netology-bucket" {
+    access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
+    secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
+    bucket = "semikova-netology-bucket"
+    acl    = "public-read"
+    server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = yandex_kms_symmetric_key.secret-key.id
+        sse_algorithm     = "aws:kms"
+      }
+    }
+  }
+}
+```
+
