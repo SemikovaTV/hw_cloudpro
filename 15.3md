@@ -23,7 +23,7 @@
 
 --- 
 ### Ответ:
-1. Создаю ролья для KMS:
+1. Создаю роль для KMS:
 ```hcl
 resource "yandex_resourcemanager_folder_iam_member" "sa-editor-encrypter-decrypter" {
   folder_id = var.folder_id
@@ -56,4 +56,13 @@ resource "yandex_storage_bucket" "netology-bucket" {
   }
 }
 ```
+Проверяю, что ключ создан:
+
+![ad]()
+
+Проверяю доступ к файлу:
+
+![ad]()
+
+Доступ отсутствует.
 
